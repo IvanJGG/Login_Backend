@@ -94,7 +94,7 @@ namespace Inventario
             }
         }
 
-        // Método para eliminar un producto del inventario
+        // Método para eliminar un producto del inventario.
         static void EliminarProducto(List<Producto> inventario)
         {
             Console.Write("Ingrese el nombre del producto a eliminar: ");
