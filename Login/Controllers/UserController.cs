@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 [Route("users")]
 public class UserController : ControllerBase
 {
-    [HttpPost]
-    public IActionResult InicioSesion([FromBody] UserLoginRequest userLogin)
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] UserLoginRequest request)
     {
-        return Ok(new { mensaje = "Hola yo soy un POST", cuerpo = $"Gracias tu usuario es: {userLogin.Username} Tu contraseña es: {userLogin.Password}"});
-    }
-    [HttpGet]
-    public IActionResult InicioSesion1()
-    {
-        return Ok(new { mensaje = "Hola yo soy un GET" });
+        // Aquí puedes verificar el username y password
+        if (request.Username == "juan123" && request.Password == "12345")
+        {
+            return Ok(new { Message = "Inicio de sesión exitoso" });
+        }
+        return Unauthorized(new { Message = "Credenciales incorrectas" });
     }
 }
