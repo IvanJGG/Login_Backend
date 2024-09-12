@@ -1,17 +1,21 @@
+using Login.Models;
 using Microsoft.AspNetCore.Mvc;
 
-[ApiController]
-[Route("users")]
-public class UserController : ControllerBase
+namespace Login.Controllers
 {
-    [HttpPost("login")]
-    public IActionResult Login([FromBody] UserLoginRequest request)
+    [ApiController]
+    [Route("users")]
+    public class UserController : ControllerBase
     {
-        // Aquí puedes verificar el username y password
-        if (request.Username == "juan123" && request.Password == "12345")
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] UserLoginRequest request)
         {
-            return Ok(new { Message = "Inicio de sesión exitoso" });
+            // Aquí puedes verificar el username y password
+            if (request.Username == "juan123" && request.Password == "12345")
+            {
+                return Ok(new { Message = "Inicio de sesión exitoso" });
+            }
+            return Unauthorized(new { Message = "Credenciales incorrectas" });
         }
-        return Unauthorized(new { Message = "Credenciales incorrectas" });
     }
 }
