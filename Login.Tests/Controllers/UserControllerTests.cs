@@ -21,7 +21,7 @@ namespace Login.Tests.Controllers
 
             //Assert
             result?.StatusCode.Should().Be(StatusCodes.Status200OK, result.Value?.ToString());
-            (result.Value as UserLoginResponse).Message.Should().Be("Inicio de sesión exitoso");
+            (result!.Value as UserLoginResponse)!.Message.Should().Be("Inicio de sesión exitoso");
         }
         
         [Fact]
@@ -37,7 +37,7 @@ namespace Login.Tests.Controllers
 
             //Assert
             result?.StatusCode.Should().Be(StatusCodes.Status401Unauthorized, result.Value?.ToString());
-            (result.Value as UserLoginResponse).Message.Should().Be("Credenciales incorrectas");
+            (result!.Value as UserLoginResponse)!.Message.Should().Be("Credenciales incorrectas");
         }
     }
 }
