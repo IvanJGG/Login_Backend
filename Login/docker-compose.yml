@@ -12,11 +12,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data  # Volumen para la persistencia de datos
 
-  adminer:
-    image: adminer  # Herramienta para gestionar bases de datos desde una interfaz gráfica
-    ports:
-      - "8080:8080"  # Mapeamos el puerto 8080 del contenedor al puerto 8080 de la máquina local
-
 volumes:
   postgres_data:
     driver: local  # Volumen local para la base de datos
