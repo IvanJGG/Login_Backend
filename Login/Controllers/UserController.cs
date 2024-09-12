@@ -4,16 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 [Route("users")]
 public class UserController : ControllerBase
 {
-    [HttpPost("iniciosesion")]
-    public IActionResult InicioSesion([FromBody] UserLoginRequest userLogin)
-    {
-        return Ok(new { mensaje = "Hola yo soy un POST", cuerpo = $"Gracias tu usuario es: {userLogin.Username} Tu contraseña es: {userLogin.Password}"});
-    }
-    [HttpGet]
-    public IActionResult InicioSesion1()
-    {
-        return Ok(new { mensaje = "Hola yo soy un GET" });
-    }
     [HttpPost("login")]
     public IActionResult Login([FromBody] UserLoginRequest request)
     {
