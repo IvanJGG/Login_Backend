@@ -29,29 +29,30 @@ public class UserController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register([FromBody] UserRegisterRequest register)
     {
-        // Leer la lista de usuarios
-        List<Usuario> usuarios = LeerUsuarios();
+    // Leer la lista de usuarios
+    List<Usuario> usuarios = LeerUsuarios();
 
-        // Verificar si el nombre de usuario ya está registrado
-        if (usuarios.Any(u => u.NombreUsuario == register.Username_register))
-        {
-            return Conflict(new { Message = "El nombre de usuario ya está en uso" });
-        }
-
-        // Agregar el nuevo usuario a la lista
-        Usuario nuevoUsuario = new Usuario
-        {
-            NombreUsuario = register.Username_register,
-            Contraseña = register.Password_register
-        };
-        usuarios.Add(nuevoUsuario);
-
-        // Guardar la lista de usuarios actualizada en el archivo JSON
-        GuardarUsuarios(usuarios);
-
-        return Ok(new { Message = "Te has registrado exitosamente" });
+    // Verificar si el nombre de usuario ya está registrado
+    if (usuarios.Any(u => u.NombreUsuario == register.Username_register))
+    {
+        return Conflict(new ResponseMessage { Message = "El nombre de usuario ya está en uso" });
     }
 
+    // Agregar el nuevo usuario a la lista
+    Usuario nuevoUsuario = new Usuario
+    {
+        NombreUsuario = register.Username_register,
+        Contraseña = register.Password_register
+    };
+    usuarios.Add(nuevoUsuario);
+
+    // Guardar la lista de usuarios actualizada en el archivo JSON
+    GuardarUsuarios(usuarios);
+
+    return Ok(new ResponseMessage { Message = "Te has registrado exitosamente" });
+    }
+
+    
     [HttpPost("login")]
     public IActionResult Login([FromBody] UserLoginRequest login)
     {
@@ -62,10 +63,10 @@ public class UserController : ControllerBase
         Usuario? usuario = usuarios.FirstOrDefault(u => u.NombreUsuario == login.Username && u.Contraseña == login.Password);
         if (usuario != null)
         {
-            return Ok(new { Message = "Inicio de sesión exitoso" });
+            return Ok(new ResponseMessage { Message = "Inicio de sesión exitoso" });
         }
 
-        return Unauthorized(new { Message = "Credenciales incorrectas" });
+        return Unauthorized(new ResponseMessage { Message = "Credenciales incorrectas" });
     }
 }
 
