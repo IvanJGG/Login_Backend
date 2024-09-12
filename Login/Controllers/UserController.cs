@@ -13,9 +13,9 @@ namespace Login.Controllers
             // Aquí puedes verificar el username y password
             if (request.Username == "juan123" && request.Password == "12345")
             {
-                return Ok(new { Message = "Inicio de sesión exitoso" });
+                return Ok(new UserLoginResponse { Message = "Inicio de sesión exitoso" });
             }
-            return Unauthorized(new { Message = "Credenciales incorrectas" });
+            return Unauthorized(new UserLoginResponse { Message = "Credenciales incorrectas" });
         }
     }
 }
