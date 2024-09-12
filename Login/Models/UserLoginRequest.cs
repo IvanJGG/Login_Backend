@@ -16,3 +16,9 @@ public class ResponseMessage
 {
     public string? Message { get; set; }
 }
+
+public class Usuario
+{
+    public string? NombreUsuario { get; set; }
+    public string? Contraseña { get; set; }
+}
