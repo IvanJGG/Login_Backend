@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Login.Models;
+using Login.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Login.Controllers
@@ -8,17 +9,24 @@ namespace Login.Controllers
     [Route("users")]
     public class UserController : ControllerBase
     {
-        private readonly string archivoUsuarios = "Data/usuarios.json";
+        private readonly string archivoUsuarios = Directory.GetCurrentDirectory() + "/Data/usuarios.json";
+        
+        private readonly IFileService _fileService;
+
+        public UserController(IFileService fileService)
+        {
+            _fileService = fileService;
+        }
 
         // Método para leer los usuarios del archivo JSON
         private List<Usuario> LeerUsuarios()
         {
-            if (!System.IO.File.Exists(archivoUsuarios))
+            if (!_fileService.Exists(archivoUsuarios))
             {
                 return new List<Usuario>(); // Si el archivo no existe, devuelve una lista vacía.
             }
 
-            string json = System.IO.File.ReadAllText(archivoUsuarios);
+            string json = _fileService.ReadAllText(archivoUsuarios);
             return JsonSerializer.Deserialize<List<Usuario>>(json) ?? new List<Usuario>();
         }
 
@@ -26,7 +34,7 @@ namespace Login.Controllers
         private void GuardarUsuarios(List<Usuario> usuarios)
         {
             string json = JsonSerializer.Serialize(usuarios, new JsonSerializerOptions { WriteIndented = true });
-            System.IO.File.WriteAllText(archivoUsuarios, json);
+            _fileService.WriteAllText(archivoUsuarios, json);
         }
 
         [HttpPost("register")]
