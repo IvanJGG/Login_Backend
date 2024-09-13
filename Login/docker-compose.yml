@@ -1,17 +1,12 @@
-version: '3.8'
-
+version: '3'
 services:
   db:
     image: postgres:latest  # Usamos la imagen oficial de PostgreSQL
     environment:
-      POSTGRES_USER: mi_usuario       # Usuario de PostgreSQL
-      POSTGRES_PASSWORD: mi_contraseña # Contraseña del usuario
-      POSTGRES_DB: mi_base_de_datos   # Base de datos que se creará
+      POSTGRES_USER: juan123    # Definimos el usuario de PostgreSQL
+      POSTGRES_PASSWORD: 12345  # Definimos la contraseña para el usuario
+      POSTGRES_DB: base_de_datos   # Definimos la base de datos que se creará
     ports:
       - "5432:5432"  # Mapeamos el puerto 5432 del contenedor al puerto 5432 de la máquina local
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # Volumen para la persistencia de datos
-
-volumes:
-  postgres_data:
-    driver: local  # Volumen local para la base de datos
+      - ./data:/var/lib/postgresql/data  # Montamos un volumen para que los datos persistan
