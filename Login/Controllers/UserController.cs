@@ -52,6 +52,7 @@ namespace Login.Controllers
             // Agregar el nuevo usuario a la lista
             Usuario nuevoUsuario = new Usuario
             {
+                FullnameUser = register.FullnameRegister,
                 UsernameUser = register.UsernameRegister,
                 PasswordUser = register.PasswordRegister
             };
