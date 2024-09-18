@@ -24,15 +24,17 @@ namespace Login.Tests.Controllers
             _mockFileService.Setup(x => x.Exists(It.IsAny<string>()))
                 .Returns(true);
             _mockFileService.Setup(x => x.ReadAllText(It.IsAny<string>()))
-                .Returns(JsonSerializer.Serialize(new List<Usuario>(){new(){NombreUsuario = username,Contraseña = password}}));
+                .Returns(JsonSerializer.Serialize(new List<Usuario>(){new(){UsernameUser = username,PasswordUser = password}}));
             
             //Act
             var controller = new UserController(_mockFileService.Object);
             var result = controller.Login(request) as ObjectResult;  
+            
 
             //Assert
             result?.StatusCode.Should().Be(StatusCodes.Status200OK, result.Value?.ToString());
             (result!.Value as UserLoginResponse)!.Message.Should().Be("Inicio de sesión exitoso");
+
         }
         
         [Fact]

@@ -27,7 +27,7 @@ namespace Login.Controllers
             }
 
             string json = _fileService.ReadAllText(archivoUsuarios);
-            return JsonSerializer.Deserialize<List<Usuario>>(json) ?? new List<Usuario>();
+            return JsonSerializer.Deserialize<List<Usuario>>(json) ?? new List<Usuario>(); 
         }
 
         // Método para guardar los usuarios en el archivo JSON
