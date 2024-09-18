@@ -44,7 +44,7 @@ namespace Login.Controllers
             List<Usuario> usuarios = LeerUsuarios();
 
             // Verificar si el nombre de usuario ya está registrado
-            if (usuarios.Any(u => u.NombreUsuario == register.UsernameRegister))
+            if (usuarios.Any(u => u.UsernameUser == register.UsernameRegister))
             {
                 return Conflict(new UserLoginResponse() { Message = "El nombre de usuario ya está en uso" });
             }
@@ -52,8 +52,8 @@ namespace Login.Controllers
             // Agregar el nuevo usuario a la lista
             Usuario nuevoUsuario = new Usuario
             {
-                NombreUsuario = register.UsernameRegister,
-                Contraseña = register.PasswordRegister
+                UsernameUser = register.UsernameRegister,
+                PasswordUser = register.PasswordRegister
             };
             usuarios.Add(nuevoUsuario);
 
@@ -71,10 +71,10 @@ namespace Login.Controllers
             List<Usuario> usuarios = LeerUsuarios();
 
             // Verificar las credenciales
-            Usuario? usuario = usuarios.FirstOrDefault(u => u.NombreUsuario == login.Username && u.Contraseña == login.Password);
+            Usuario? usuario = usuarios.FirstOrDefault(u => u.UsernameUser == login.Username && u.PasswordUser == login.Password);
             if (usuario != null)
             {
-                return Ok(new UserLoginResponse { Message = "Inicio de sesión exitoso", Username = usuario.NombreUsuario });
+                return Ok(new UserLoginResponse { Message = "Inicio de sesión exitoso", Username = usuario.UsernameUser });
             }
 
             return Unauthorized(new UserLoginResponse { Message = "Credenciales incorrectas" });

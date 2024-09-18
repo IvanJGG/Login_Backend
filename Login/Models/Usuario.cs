@@ -2,7 +2,7 @@
 {
     public class Usuario
     {
-        public string? NombreUsuario { get; set; }
-        public string? Contraseña { get; set; }
+        public string? UsernameUser { get; set; }
+        public string? PasswordUser { get; set; }
     }
 }
