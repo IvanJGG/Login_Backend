@@ -75,7 +75,7 @@ namespace Login.Controllers
             Usuario? usuario = usuarios.FirstOrDefault(u => u.UsernameUser == login.Username && u.PasswordUser == login.Password);
             if (usuario != null)
             {
-                return Ok(new UserLoginResponse { Message = "Inicio de sesión exitoso", Username = usuario.UsernameUser });
+                return Ok(new UserLoginResponse { Message = "Inicio de sesión exitoso", Username = usuario.UsernameUser, Fullname = usuario.FullnameUser });
             }
 
             return Unauthorized(new UserLoginResponse { Message = "Credenciales incorrectas" });
